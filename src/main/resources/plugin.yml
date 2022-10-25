@@ -1,0 +1,6 @@
+name: HideyQOL
+version: '${project.version}'
+main: com.samifying.hideyqol.Main
+api-version: 1.19
+authors: [ Rooot ]
+description: Quality-of-Life features for the HideySMP Minecraft server
