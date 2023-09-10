@@ -11,3 +11,7 @@ commands:
     description: Calculate the coordinates of a portal
     usage: /portalcalc
     aliases: [ pc ]
+  setmaxplayers:
+    description: Change the max player count of the server
+    permission: hideyqol.setmaxplayers
+    usage: /setmaxplayers <maxplayers>

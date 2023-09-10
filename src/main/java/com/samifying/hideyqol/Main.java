@@ -1,13 +1,17 @@
 package com.samifying.hideyqol;
 
 import com.samifying.hideyqol.commands.PortalCalculatorCommand;
+import com.samifying.hideyqol.commands.SetPlayerCapCommand;
 import com.samifying.hideyqol.listeners.*;
 import com.samifying.hideyqol.utils.SetwarpHelper;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
+    private static Main instance;
+
     @Override
     public void onEnable() {
+        instance = this;
         // Plugin startup logic
 
         SetwarpHelper.init(this);
@@ -27,6 +31,7 @@ public final class Main extends JavaPlugin {
 
         // Register commands
         this.getCommand("portalcalc").setExecutor(new PortalCalculatorCommand());
+        this.getCommand("setmaxplayers").setExecutor(new SetPlayerCapCommand());
 
         // Initialisation done
         getLogger().info("HideyQOL " + this.getDescription().getVersion() + "has been enabled!");
@@ -36,5 +41,9 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         SetwarpHelper.saveConfig();
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 }
