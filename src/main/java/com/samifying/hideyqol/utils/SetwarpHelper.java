@@ -11,6 +11,8 @@ public class SetwarpHelper {
     private static File configFile;
     private static FileConfiguration config;
 
+    private static long cooldown = 0;
+
     public static void init(JavaPlugin plugin) {
         configFile = new File(plugin.getDataFolder(), "setwarp-cooldown.yml");
 
@@ -24,6 +26,10 @@ public class SetwarpHelper {
         }
 
         config = YamlConfiguration.loadConfiguration(configFile);
+        config.addDefault("cooldown", 172800);
+
+        cooldown = config.getLong("cooldown");
+
         if (!config.isConfigurationSection("players")) {
             config.createSection("players");
         }
@@ -44,7 +50,7 @@ public class SetwarpHelper {
         long lastWarp = config.getLong("players." + uuid + ".last-set-warp", 0);
         if (lastWarp == 0) return 0;
 
-        return lastWarp - (System.currentTimeMillis() / 1000) + 15;
+        return lastWarp - (System.currentTimeMillis() / 1000) + cooldown;
     }
 
     public static void setWarpCooldown(String uuid) {
