@@ -34,8 +34,8 @@ public class SetwarpHelper {
             config.createSection("players");
         }
 
-        // 5 * 20 = 5 seconds
-        new AutoSaveSetwarpCooldownsRunnable().runTaskTimerAsynchronously(plugin, 0, 5 * 20);
+        // 30 * 20 = 30 seconds
+        new AutoSaveSetwarpCooldownsRunnable().runTaskTimerAsynchronously(plugin, 0, 30 * 20);
     }
 
     public static void saveConfig() {
