@@ -52,7 +52,6 @@ public class SpeedFoxListener implements Listener {
         // remove fox attribute speed boost
         for (AttributeModifier modifier : movementSpeed.getModifiers()) {
             if (modifier.getUniqueId().equals(FOX_SPEED_MODIFIER_UUID)) {
-                System.out.println("Removing modifier " + modifier.getName());
                 movementSpeed.removeModifier(modifier);
             }
         }
