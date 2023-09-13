@@ -21,12 +21,14 @@ public class MendingItemSaveListener implements Listener {
             return;
         }
 
+        ItemMeta meta = item.getItemMeta();
+        if (!meta.hasEnchant(Enchantment.MENDING)) return;
+
         int maxDurability = item.getType().getMaxDurability();
-        int totalDamage = ((Damageable) item.getItemMeta()).getDamage() + event.getDamage();
+        int totalDamage = ((Damageable) meta).getDamage() + event.getDamage();
         int targetDurability = maxDurability - totalDamage;
 
         if (targetDurability <= 1) {
-            ItemMeta meta = item.getItemMeta();
             ((Damageable) meta).setDamage(maxDurability - 1);
             item.setItemMeta(meta);
 
