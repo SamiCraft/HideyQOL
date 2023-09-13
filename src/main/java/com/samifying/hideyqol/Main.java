@@ -22,6 +22,7 @@ public final class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new SilenceMobsListener(), this);
         this.getServer().getPluginManager().registerEvents(new EnderDragonElytraListener(), this);
         this.getServer().getPluginManager().registerEvents(new ZombifyListener(), this);
+        this.getServer().getPluginManager().registerEvents(new MendingItemSaveListener(), this);
 
         if (this.getServer().getPluginManager().getPlugin("Essentials") != null) {
             this.getServer().getPluginManager().registerEvents(new WarpCooldownListener(), this);
