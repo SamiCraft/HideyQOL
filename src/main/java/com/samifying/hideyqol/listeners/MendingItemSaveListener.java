@@ -1,5 +1,6 @@
 package com.samifying.hideyqol.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +25,7 @@ public class MendingItemSaveListener implements Listener {
 
         ItemMeta meta = item.getItemMeta();
         if (!meta.hasEnchant(Enchantment.MENDING)) return;
+        if (isArmorPiece(item)) return;
 
         int maxDurability = item.getType().getMaxDurability();
         int totalDamage = ((Damageable) meta).getDamage() + event.getDamage();
@@ -41,9 +43,20 @@ public class MendingItemSaveListener implements Listener {
         ItemMeta meta = item.getItemMeta();
         if (!(meta instanceof Damageable)) return false;
         if (!meta.hasEnchant(Enchantment.MENDING)) return false;
+        if (isArmorPiece(item)) return false;
 
         int durability = item.getType().getMaxDurability() - ((Damageable) meta).getDamage();
         return durability <= 1;
+    }
+
+    // this code makes me sad ☹
+    // pls tell me there's a better way to do this without NMS or hardcoding
+    private boolean isArmorPiece(ItemStack item) {
+        return item.getType().name().endsWith("_HELMET")
+                || item.getType().name().endsWith("_CHESTPLATE")
+                || item.getType().name().endsWith("_LEGGINGS")
+                || item.getType().name().endsWith("_BOOTS")
+                || item.getType().equals(Material.ELYTRA);
     }
 
     // --- listeners for item usage ---
